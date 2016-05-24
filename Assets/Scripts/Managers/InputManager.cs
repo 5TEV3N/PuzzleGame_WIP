@@ -13,8 +13,13 @@ public class InputManager : MonoBehaviour
     {
         PlayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 	}
-	
-	void Update ()
+
+    void Update()
+    {
+        PlayerInputs();
+    }
+
+    public void PlayerInputs()
     {
         //MOUSE INPUTS
         //using the variables mouseXaxis and Yaxis, get the input > Axis Settings called Mouse X and Y. They have the mouse controllers
@@ -26,5 +31,15 @@ public class InputManager : MonoBehaviour
             PlayerController.MouseLook(mouseXAxis, mouseYAxis);
         }
 
+        // PLAYER MOVEMENT INPUTS
+        //using the variables mouseXaxis and Yaxis, get the input > Axis Settings called Mouse X and Y. They have the mouse controllers
+        xAxis = Input.GetAxisRaw("Horizontal");
+        zAxis = Input.GetAxisRaw("Vertical");
+
+        //only move if the value of horizontal axis(xAxis), vertical axis(zAxis) is not equal to 0
+        if (xAxis != 0 || zAxis != 0)
+        {
+            PlayerController.PlayerMove(xAxis, zAxis);
+        }
     }
 }
