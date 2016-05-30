@@ -5,17 +5,13 @@ public class PlayerController : MonoBehaviour
 {
     public float playerSpeed;
     public float mouseSensitivity = 1;
-    public Camera playerCamera;
 
+    public Camera playerCamera;
     public Rigidbody rb;
 
-    private Vector3 move;
-
-    void Awake()
+    void Awake ()
     {
-        rb = gameObject.GetComponent<Rigidbody>(); // reff to Rigidbody component
-        move = new Vector3(rb.velocity.x,0f,rb.velocity.z);
-
+        rb = GetComponent<Rigidbody>();
     }
 
     public void MouseLook(float mouseXAxis, float mouseYAxis)
@@ -29,30 +25,39 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerMove(float xAxis, float zAxis)
     {
-        if (xAxis != 0 )
+        //if you're not moving Left or Right
+        if (xAxis != 0)
         {
-            if (xAxis > 0 ) //if moving right
+            if (xAxis > 0)
             {
+                //positive x = Right
                 rb.AddForce(transform.right * playerSpeed);
             }
 
-            if (xAxis < 0 ) // if moving left
+            if (xAxis < 0)
             {
+                //negative x = Left
                 rb.AddForce(-transform.right * playerSpeed);
             }
+
         }
 
-        else if (zAxis!=0)
+        //if you're not moving Forward or Back
+        if (zAxis != 0)
         {
-            if (zAxis > 0) // if moving forward
+            if (zAxis > 0)
             {
+                //positive z = Forward
                 rb.AddForce(transform.forward * playerSpeed);
             }
 
-            if (zAxis < 0) // if moving back
+            if (zAxis < 0)
             {
+                //negative z = Back
                 rb.AddForce(-transform.forward * playerSpeed);
             }
         }
     }
+
+
 }
