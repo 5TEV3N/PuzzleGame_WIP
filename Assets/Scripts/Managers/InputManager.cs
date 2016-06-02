@@ -3,14 +3,16 @@ using System.Collections;
 
 public class InputManager : MonoBehaviour
 {
+    public bool canScroll = false;
     private PlayerController PlayerController; //reff to PlayerController
-    private RaycastingManager RaycastingManager; // refference to the RaycastingManager 
+    private RaycastingManager RaycastingManager; // reff to the RaycastingManager
+    private MouseController MouseController; // reff to MouseController
     private GameObject myGo;
     private float xAxis = 0; // left and right movement  (1+ right, -1 left)
     private float zAxis = 0; // front and back movement (1+ forward, -1 back)
     float mouseXAxis = 0; // left or right movement of mouse (camera). Positive numb = right, Negative numb = left
     float mouseYAxis = 0; // up or down movement of mouse (camera). Positive numb = up, Negative numb = down.
-    
+    float mouseScrolling = 0;
 
     void Awake ()
     {
@@ -24,16 +26,33 @@ public class InputManager : MonoBehaviour
         //using the variables mouseXaxis and Yaxis, get the input > Axis Settings called Mouse X and Y. They have the mouse controllers
         mouseXAxis = Input.GetAxis("Mouse X");
         mouseYAxis = Input.GetAxis("Mouse Y");
-
+        mouseScrolling = Input.GetAxis("Mouse ScrollWheel");
+       
         if (mouseXAxis != 0 || mouseYAxis != 0)
         {
             PlayerController.MouseLook(mouseXAxis, mouseYAxis);
         }
-        
-        // RAYCASTING
+
+        if (canScroll == true)
+        {
+            if (mouseScrolling != 0)
+            {
+                MouseController.pushPullObject(mouseScrolling);
+            }
+        }
+
+        // RAYCASTING + OBJECT DRAGGING
         if (Input.GetMouseButtonDown(0))
         {
+            //MouseController.OnMouseDrag();
             RaycastingManager.CastRay();
+            canScroll = true;
+            print("canScroll = " + canScroll);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            canScroll = false;
+            print("canScroll = " + canScroll);
         }
        
         // PLAYER MOVEMENT INPUTS
