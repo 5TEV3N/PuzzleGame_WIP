@@ -4,10 +4,13 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public float playerSpeed;
-    public float mouseSensitivity = 1;
+    public float mouseSensitivity = 1f;
+    public float jumpHeight = 200f;
 
     public Camera playerCamera;
     public Rigidbody rb;
+
+    private bool isGrounded;
 
     void Awake ()
     {
@@ -65,9 +68,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnCollisionExit(Collision other)
+    {
+        print(isGrounded);
+        isGrounded = false;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        print(isGrounded);
+        isGrounded = true;
+    }
+
     public void PlayerJump()
     {
-
+        if (isGrounded == true)
+        {
+            print("jumping");
+            rb.AddForce(0f, jumpHeight, 0f);
+        }
     }
 
 }

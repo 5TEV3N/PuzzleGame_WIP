@@ -51,7 +51,7 @@ public class InputManager : MonoBehaviour
 
 
         //JUMPING
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             PlayerController.PlayerJump();
         }
