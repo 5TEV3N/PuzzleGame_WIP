@@ -21,6 +21,12 @@ public class PlayerController : MonoBehaviour
 
         // rotate the camera on the x axis to look up and down.
         playerCamera.transform.Rotate(-mouseYAxis * mouseSensitivity, 0, 0);
+        
+        if (-mouseYAxis >= 180)
+        {
+            print("aswdf");
+        }
+       
     }
 
     public void PlayerMove(float xAxis, float zAxis)
