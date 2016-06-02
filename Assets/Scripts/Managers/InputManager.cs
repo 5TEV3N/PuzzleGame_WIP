@@ -49,5 +49,11 @@ public class InputManager : MonoBehaviour
             PlayerController.PlayerMove(xAxis, zAxis);
         }
 
+
+        //JUMPING
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayerController.PlayerJump();
+        }
     }
 }

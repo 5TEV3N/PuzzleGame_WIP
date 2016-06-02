@@ -3,8 +3,8 @@ using System.Collections;
 
 public class MouseController : MonoBehaviour
 {
-    public float distance = 10; // How far you can can drag an object    
-
+    public float distance = 10; // How far you can can drag an object 
+    
     void OnMouseDrag()
     {
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance); //Make a new Vector 3 which takes the position of your mouse's xy co ordinance
